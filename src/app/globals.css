@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/*
+ * BD Clarity — design tokens (Visual Identity Redesign)
+ *
+ * BD Clarity now has its own product identity, separate from Banao
+ * Digital's parent-brand copper-orange:
+ *   - "verified" = BD Clarity's primary/AI accent (Indigo/Violet).
+ *     Kept under its original variable/class name (bg-verified,
+ *     text-verified-dark, etc.) rather than renamed, so the ~56 files
+ *     already using it for genuinely primary/AI purposes (CTAs, active
+ *     nav, AI recommendations, the generating/intelligence treatment)
+ *     automatically pick up the new color with zero changes — but
+ *     every place "verified" was standing in for SUCCESS rather than
+ *     PRIMARY/AI has been deliberately redirected to the new "success"
+ *     (Emerald) token instead, file by file, not blindly.
+ *   - "success" (NEW) = Emerald — positive sentiment, completed states,
+ *     confirmations. Previously these incorrectly shared the orange
+ *     primary accent; now distinct.
+ *   - "voice" (NEW) = Teal/Cyan — Customer Voice, Customer Pulse.
+ *   - "gold" = Amber — ratings, attention/warnings (unchanged, was
+ *     already correct — except the one AI Recommendation card that had
+ *     wrongly borrowed gold for an AI purpose; that moves to "verified").
+ *   - "danger" = Red — critical/error (unchanged, already correct).
+ *   - "banao" (NEW) = the OLD copper-orange, now reserved narrowly for
+ *     explicit parent-brand moments (BanaoAttribution.tsx) only — never
+ *     the default for any BD Clarity CTA, success, AI, or nav state.
+ */
+:root {
+  --color-paper: #f6f8fb;
+  --color-paper-raised: #ffffff;
+  --color-ink: #0f1729;
+  --color-ink-soft: #334155;
+  --color-slate: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+
+  /* Primary / BD Clarity intelligence (Indigo/Violet) */
+  --color-verified: #5b4fd6;
+  --color-verified-dark: #4338ab;
+  --color-verified-tint: #ece9fb;
+
+  /* Success / positive sentiment / completed states (Emerald) */
+  --color-success: #16915f;
+  --color-success-dark: #0f6e48;
+  --color-success-tint: #e3f6ed;
+
+  /* Customer Voice / Customer Pulse (Teal/Cyan) */
+  --color-voice: #0e9ba8;
+  --color-voice-dark: #0a7a85;
+  --color-voice-tint: #e0f5f6;
+
+  /* Ratings / attention / warnings (Amber — unchanged) */
+  --color-gold: #c08a2e;
+  --color-gold-tint: #f8eedb;
+
+  /* Critical / error (unchanged) */
+  --color-danger: #b3432b;
+  --color-danger-tint: #f8e9e4;
+
+  /* Banao Digital parent-brand copper-orange — reserved for explicit
+     parent-brand moments only (see BanaoAttribution.tsx). Never the
+     default color for a BD Clarity CTA, success, AI, or nav state. */
+  --color-banao: #c1611e;
+  --color-banao-dark: #9c4e18;
+
+  /* Premium accent gradient — BD Clarity's OWN identity gradient
+     (Indigo -> lighter Violet), used sparingly (hero/login/greeting/AI
+     moments only), per "gradients only where they genuinely improve the
+     design," never as a default button/card background. */
+  --gradient-brand: linear-gradient(135deg, #4338ab 0%, #7c6ae8 100%);
+  /* The old Banao copper gradient — kept, narrowly, for parent-brand
+     moments only (BanaoAttribution.tsx), never used as the product's
+     own primary gradient anymore. */
+  --gradient-banao: linear-gradient(135deg, #c1611e 0%, #e2934f 100%);
+  /* Soft, cool canvas wash for full-page backgrounds (auth, public
+     feedback) — gives a page body intentional depth instead of flat
+     white, without being a loud "gradient background." Always sits
+     behind paper-raised cards, never behind them competing for
+     attention. */
+  --gradient-canvas: radial-gradient(ellipse 120% 80% at 50% -10%, #ece9fb 0%, #f6f8fb 55%);
+
+  /* Premium, warm-tinted shadow scale — deliberately not pure black, so
+     elevation reads as soft/premium rather than a generic UI-kit drop
+     shadow. Tailwind v4 exposes these as shadow-xs/sm/md/lg/premium
+     utilities via the @theme block below. */
+  --shadow-color: 20 15 10;
+  --shadow-xs: 0 1px 2px rgb(var(--shadow-color) / 0.04);
+  --shadow-sm: 0 1px 3px rgb(var(--shadow-color) / 0.06), 0 1px 2px rgb(var(--shadow-color) / 0.04);
+  --shadow-md: 0 4px 10px rgb(var(--shadow-color) / 0.07), 0 2px 4px rgb(var(--shadow-color) / 0.05);
+  --shadow-lg: 0 12px 28px rgb(var(--shadow-color) / 0.10), 0 4px 10px rgb(var(--shadow-color) / 0.06);
+  /* A touch of brand color in the shadow — reserved for the primary
+     button's hover state and the single most important CTA per screen,
+     never for ordinary cards. */
+  --shadow-premium: 0 8px 20px rgb(193 97 30 / 0.18), 0 2px 6px rgb(193 97 30 / 0.12);
+
+  /* 12-16px radius system, per the approved visual direction. */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@theme inline {
+  --color-paper: var(--color-paper);
+  --color-paper-raised: var(--color-paper-raised);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-slate: var(--color-slate);
+  --color-border: var(--color-border);
+  --color-border-strong: var(--color-border-strong);
+  --color-verified: var(--color-verified);
+  --color-verified-dark: var(--color-verified-dark);
+  --color-verified-tint: var(--color-verified-tint);
+  --color-success: var(--color-success);
+  --color-success-dark: var(--color-success-dark);
+  --color-success-tint: var(--color-success-tint);
+  --color-voice: var(--color-voice);
+  --color-voice-dark: var(--color-voice-dark);
+  --color-voice-tint: var(--color-voice-tint);
+  --color-gold: var(--color-gold);
+  --color-gold-tint: var(--color-gold-tint);
+  --color-danger: var(--color-danger);
+  --color-danger-tint: var(--color-danger-tint);
+  --color-banao: var(--color-banao);
+  --color-banao-dark: var(--color-banao-dark);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-premium: var(--shadow-premium);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+}
+
+/* Full-page canvas wash — applied via a utility class (bg-canvas) rather
+   than redefining --color-paper itself, so existing bg-paper usages
+   (cards, inputs, etc.) are completely unaffected; only page-level
+   containers that opt in get the warmer, deeper backdrop. */
+.bg-canvas {
+  background-image: var(--gradient-canvas);
+  background-color: var(--color-paper);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: var(--color-verified);
+  color: var(--color-paper-raised);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-verified);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
